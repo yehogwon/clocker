@@ -4,11 +4,10 @@
 
 ## Todos
 
-- Implement basic functionality.
-- Add templates for PR and issues.
 - Deploy to `pypi`
   - Add `LICENSE`
   - Add `pyproject.toml`
+- Add templates for PR and issues.
 - CI/CD
 
 ## Features
