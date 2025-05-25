@@ -1,8 +1,9 @@
 # `clocker`
 
-<div align="center">
-    ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
+</p>
+
 
 `clocker` is a Python package that helps you measure the time taken by code execution. It provides a simple and intuitive way to track performance and optimize your code.
 
