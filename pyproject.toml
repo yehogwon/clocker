@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "clocker"
+name = "ticktocker"
 version = "0.1"
 description = "A simple Python package for clocking"
 authors = [{ name="Yeho Gwon", email="yeho.gwon@postech.ac.kr" }]

@@ -1,11 +1,11 @@
-# `clocker`
+# `ticktocker`
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
 </p>
 
 
-`clocker` is a Python package that helps you measure the time taken by code execution. It provides a simple and intuitive way to track performance and optimize your code.
+`ticktocker` is a Python package that helps you measure the time taken by code execution. It provides a simple and intuitive way to track performance and optimize your code.
 
 ## Todos
 
@@ -18,10 +18,10 @@
 
 ### Context Manager
 
-`clocker` supports to measure the time taken by a block of code using a context manager.
+`ticktocker` supports to measure the time taken by a block of code using a context manager.
 
 ```python
-from clocker import clock
+from ticktocker import clock
 
 with clock() as sw:
     ...
@@ -30,10 +30,10 @@ print(sw.elapsed)
 
 ### Decorator
 
-`clocker` also supports to measure the time taken by a function using a decorator.
+`ticktocker` also supports to measure the time taken by a function using a decorator.
 
 ```python
-from clocker import clock
+from ticktocker import clock
 
 @clock
 def my_function():
