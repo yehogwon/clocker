@@ -12,7 +12,6 @@
 - CI/CD
   - Unit tests
   - Git branching
-- Add templates for PR and issues.
 
 ## Features
 
