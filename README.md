@@ -28,9 +28,9 @@ print(sw.elapsed)
 `clocker` also supports to measure the time taken by a function using a decorator.
 
 ```python
-from clocker import clocker
+from clocker import clock
 
-@clocker
+@clock
 def my_function():
     ...
 my_function() # Elapsed time: ...
