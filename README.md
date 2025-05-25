@@ -1,9 +1,10 @@
-# `stopwatch`
+# `clocker`
 
-`stopwatch` is a Python package that helps you measure the time taken by code execution. It provides a simple and intuitive way to track performance and optimize your code.
+`clocker` is a Python package that helps you measure the time taken by code execution. It provides a simple and intuitive way to track performance and optimize your code.
 
 ## Todos
 
+- Implement basic functionality.
 - Add templates for PR and issues.
 - Deploy to `pypi`
 - CI/CD
@@ -12,24 +13,24 @@
 
 ### Context Manager
 
-`stopwatch` supports to measure the time taken by a block of code using a context manager.
+`clocker` supports to measure the time taken by a block of code using a context manager.
 
 ```python
-from stopwatch import Stopwatch
+from clocker import clock
 
-with Stopwatch() as sw:
+with clock() as sw:
     ...
 print(sw.elapsed)
 ```
 
 ### Decorator
 
-`stopwatch` also supports to measure the time taken by a function using a decorator.
+`clocker` also supports to measure the time taken by a function using a decorator.
 
 ```python
-from stopwatch import stopwatch
+from clocker import clocker
 
-@stopwatch
+@clocker
 def my_function():
     ...
 my_function() # Elapsed time: ...
