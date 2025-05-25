@@ -1,2 +1,8 @@
 .vscode
 DS_Store
+
+# Python packaging artifacts
+dist/
+build/
+*.egg-info/
+

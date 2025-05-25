@@ -9,11 +9,10 @@
 
 ## Todos
 
-- Deploy to `pypi`
-  - Add `LICENSE`
-  - Add `pyproject.toml`
-- Add templates for PR and issues.
 - CI/CD
+  - Unit tests
+  - Git branching
+- Add templates for PR and issues.
 
 ## Features
 
