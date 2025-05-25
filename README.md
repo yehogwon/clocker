@@ -1,6 +1,7 @@
 # `ticktocker`
 
 <p align="center">
+  <img src="https://github.com/yehogwon/ticktocker/actions/workflows/ci.yml/badge.svg" alt="CI Status">
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT">
 </p>
 
