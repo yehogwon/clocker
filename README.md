@@ -11,9 +11,7 @@
 
 ## Todos
 
-- CI/CD
-  - Unit tests
-  - Git branching
+...
 
 ## Features
 
