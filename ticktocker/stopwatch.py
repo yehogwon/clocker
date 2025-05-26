@@ -27,7 +27,8 @@ class stopwatch:
     @property
     def elapsed(self) -> float:
         """
-        Returns the elapsed time in milliseconds since the stopwatch was started.
+        Returns the elapsed time in milliseconds
+        since the stopwatch was started.
         """
         self.end = _millis()
         return self.end - self.start
