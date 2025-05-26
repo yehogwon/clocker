@@ -1,1 +1,1 @@
-from .ticktocker import clock  # noqa: F401
+from .stopwatch import stopwatch  # noqa: F401

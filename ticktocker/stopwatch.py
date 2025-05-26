@@ -1,15 +1,9 @@
 from functools import wraps
-from time import time
+
+from .utils import _millis
 
 
-def _millis() -> float:
-    """
-    Returns the current time in milliseconds.
-    """
-    return round(time() * 1000)
-
-
-class clock:
+class stopwatch:
     def __enter__(self):
         self.start = _millis()
         return self
@@ -31,6 +25,10 @@ class clock:
         return wrapper
 
     @property
-    def elapsed(self):
+    def elapsed(self) -> float:
+        """
+        Returns the elapsed time in milliseconds
+        since the stopwatch was started.
+        """
         self.end = _millis()
         return self.end - self.start

@@ -15,27 +15,6 @@
 
 ## Features
 
-### Context Manager
-
-`ticktocker` supports to measure the time taken by a block of code using a context manager.
-
-```python
-from ticktocker import clock
-
-with clock() as sw:
-    ...
-print(sw.elapsed)
-```
-
-### Decorator
-
-`ticktocker` also supports to measure the time taken by a function using a decorator.
-
-```python
-from ticktocker import clock
-
-@clock
-def my_function():
-    ...
-my_function() # Elapsed time: ...
-```
+- Wall-clock time measurement
+- (Future) CPU time measurement
+- (Future) Time restrictions
