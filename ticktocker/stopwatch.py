@@ -3,7 +3,7 @@ from functools import wraps
 from .utils import _millis
 
 
-class clock:
+class stopwatch:
     def __enter__(self):
         self.start = _millis()
         return self
