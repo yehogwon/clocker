@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ticktocker"
-version = "0.4"
+version = "0.5"
 description = "A simple Python package for clocking"
 authors = [{ name="Yeho Gwon", email="yeho.gwon@postech.ac.kr" }]
 readme = "README.md"
