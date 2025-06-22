@@ -1,29 +1,29 @@
 from time import time
 
 
-class TextStyle: 
+class TextStyle:
     @staticmethod
-    def bold(text: str) -> str: 
+    def bold(text: str) -> str:
         return f'\033[1m{text}\033[0m'
 
     @staticmethod
-    def red(text: str) -> str: 
+    def red(text: str) -> str:
         return f'\033[91m{text}\033[0m'
 
     @staticmethod
-    def green(text: str) -> str: 
+    def green(text: str) -> str:
         return f'\033[92m{text}\033[0m'
-    
+
     @staticmethod
-    def yellow(text: str) -> str: 
+    def yellow(text: str) -> str:
         return f'\033[93m{text}\033[0m'
 
     @staticmethod
-    def blue(text: str) -> str: 
+    def blue(text: str) -> str:
         return f'\033[94m{text}\033[0m'
 
     @staticmethod
-    def gray(text: str) -> str: 
+    def gray(text: str) -> str:
         return f'\033[90m{text}\033[0m'
 
 
