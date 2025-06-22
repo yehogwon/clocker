@@ -1,10 +1,11 @@
 from functools import wraps
 
-from .utils import _millis
+from .utils import _millis, TextStyle
 
 
 def _print_elapsed_time(start: float, end: float, desc: str):
-    print(f'{desc}: {end - start:.4f} ms')
+    _elapsed = f'{end - start:.4f}'
+    print(f'{TextStyle.green(desc)}: {TextStyle.bold(_elapsed)} ms')
 
 
 class stopwatch:
@@ -28,7 +29,7 @@ class stopwatch:
             _start = _millis()
             result = func(*args, **kwargs)
             _end = _millis()
-            _func_name = func.__name__gs
+            _func_name = func.__name__
             _print_elapsed_time(_start, _end, _func_name)
             return result
         return wrapper
