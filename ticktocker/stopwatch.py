@@ -9,8 +9,29 @@ def _print_elapsed_time(start: float, end: float, desc: str):
 
 
 class stopwatch:
-    def __init__(self, desc: str = 'stopwatch'):
+    _FORMAT_LOOKUP = [
+        (
+            ['ms', 'milli', 'millis', 'millisecond', 'milliseconds'],
+            lambda d: f'{d:.4f} ms'
+        ),
+        (
+            ['s', 'sec', 'secs', 'second', 'seconds'],
+            lambda d: f'{d / 1000:.2f} s'
+        ),
+        (
+            ['m', 'min', 'mins', 'minute', 'minutes'],
+            lambda d: f'{d / 60000:.2f} m'
+        ),
+        (
+            ['h', 'hr', 'hrs', 'hour', 'hours'],
+            lambda d: f'{d / 3600000:.2f} h'
+        ),
+    ]
+
+    def __init__(self, desc: str = 'stopwatch', format: str = 'ms'):
         self.desc = desc
+        self.format = format
+        self.__last = None
 
     # context manager
     def __enter__(self):
@@ -23,7 +44,11 @@ class stopwatch:
         _print_elapsed_time(self.start, self.end, self.desc)
 
     # decorator
-    def __call__(self, func):
+    @staticmethod
+    def __call__(func):
+        if func is None or not callable(func):
+            raise ValueError('This is a decorator')
+
         @wraps(func)
         def wrapper(*args, **kwargs):
             _start = _millis()
@@ -33,3 +58,50 @@ class stopwatch:
             _print_elapsed_time(_start, _end, _func_name)
             return result
         return wrapper
+
+    def to_str(self, elapsed: float) -> str:
+        """
+        Convert elapsed time (ms) to string
+
+        Args:
+            elapsed (float): Elapsed time in milliseconds
+
+        Returns:
+            str: Elapsed time in string format
+        """
+        for formats, formatter in self._FORMAT_LOOKUP:
+            if self.format in formats:
+                return formatter(elapsed)
+        raise ValueError(f'Invalid format: {self.format}')
+
+    def tick(self, return_str: bool = False) -> float | str:
+        """
+        Measure the elapsed time between two consecutive calls.
+
+        .. code-block:: python
+            >>> import time
+            >>> sw = stopwatch()
+            >>> for _ in range(3):
+            ...     if delta := sw.tick(True):
+            ...         print(delta)
+            ...     time.sleep(1)
+            ...
+            1000.0000 ms
+            1000.0000 ms
+
+        Returns:
+            float: Elapsed time in milliseconds.
+                   Returns negative value on first call (False)
+                   or empty string on first call (True)
+        """
+        now = _millis()
+        if self.__last is None:
+            self.__last = now
+            return '' if return_str else -1.0
+
+        elapsed = now - self.__last
+        self.__last = now
+
+        if return_str:
+            return self.to_str(elapsed)
+        return elapsed
