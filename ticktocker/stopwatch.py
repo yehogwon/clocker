@@ -1,4 +1,5 @@
 from functools import wraps
+from typing import Callable
 
 from .utils import _millis, TextStyle
 
@@ -9,6 +10,16 @@ def _print_elapsed_time(start: float, end: float, desc: str):
 
 
 class stopwatch:
+    """
+    A stopwatch class for measuring the
+    elapsed time between two points in code.
+
+    Args:
+        desc (str): Description of the stopwatch.
+        format (str): Format of the elapsed time.
+        pretty (bool): Whether to convert with color.
+        stream (Callable[[str], None]): The stream to print the elapsed time.
+    """
     _FORMAT_LOOKUP = [
         (
             ['ms', 'milli', 'millis', 'millisecond', 'milliseconds'],
@@ -28,9 +39,18 @@ class stopwatch:
         ),
     ]
 
-    def __init__(self, desc: str = 'stopwatch', format: str = 'ms'):
+    def __init__(
+        self,
+        desc: str = 'stopwatch',
+        format: str = 'ms',
+        *,
+        pretty: bool = True,
+        stream: Callable[[str], None] = print,
+    ):
         self.desc = desc
         self.format = format
+        self.stream = stream
+        self.pretty = pretty
         self.__last = None
 
     # context manager
@@ -41,11 +61,19 @@ class stopwatch:
     # context manager
     def __exit__(self, *args):
         self.end = _millis()
-        _print_elapsed_time(self.start, self.end, self.desc)
+        self.stream(
+            f'{TextStyle.green(self.desc)}:'
+            f'{self.to_str(self.end - self.start, self.pretty)}'
+        )
 
     # decorator
-    @staticmethod
-    def __call__(func):
+    def __call__(
+        self,
+        func,
+        *,
+        stream: Callable[[str], None] = print,
+        pretty: bool = True,
+    ):
         if func is None or not callable(func):
             raise ValueError('This is a decorator')
 
@@ -55,23 +83,32 @@ class stopwatch:
             result = func(*args, **kwargs)
             _end = _millis()
             _func_name = func.__name__
-            _print_elapsed_time(_start, _end, _func_name)
+            stream(
+                f'{TextStyle.green(_func_name)}:'
+                f'{self.to_str(_end - _start, pretty)}'
+            )
             return result
         return wrapper
 
-    def to_str(self, elapsed: float) -> str:
+    def to_str(self, elapsed: float, pretty: bool = False) -> str:
         """
         Convert elapsed time (ms) to string
 
         Args:
             elapsed (float): Elapsed time in milliseconds
+            pretty (bool): Whether to convert with color
 
         Returns:
             str: Elapsed time in string format
         """
+        if hasattr(self, 'pretty'):
+            pretty = self.pretty
         for formats, formatter in self._FORMAT_LOOKUP:
             if self.format in formats:
-                return formatter(elapsed)
+                _str = formatter(elapsed)
+                if pretty:
+                    return TextStyle.bold(_str)
+                return _str
         raise ValueError(f'Invalid format: {self.format}')
 
     def tick(self, return_str: bool = False) -> float | str:
@@ -103,5 +140,5 @@ class stopwatch:
         self.__last = now
 
         if return_str:
-            return self.to_str(elapsed)
+            return self.to_str(elapsed, self.pretty)
         return elapsed
